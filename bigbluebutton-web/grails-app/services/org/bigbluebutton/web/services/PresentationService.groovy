@@ -33,6 +33,7 @@ class PresentationService {
 	def testPresentationName
 	def testUploadedPresentation
 	def defaultUploadedPresentation
+	def defaultUploadedPresentationDir
 	def presentationBaseUrl
 
 	def deletePresentation = {conf, room, filename ->

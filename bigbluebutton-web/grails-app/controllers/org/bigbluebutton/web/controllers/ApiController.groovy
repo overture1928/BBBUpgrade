@@ -40,6 +40,7 @@ import org.bigbluebutton.web.services.turn.TurnEntry
 import org.bigbluebutton.web.services.turn.StunServer
 import org.bigbluebutton.web.services.turn.RemoteIceCandidate
 import org.json.JSONArray
+import groovy.io.FileType
 
 import javax.servlet.ServletRequest
 
@@ -1984,6 +1985,10 @@ class ApiController {
 
     if (requestBody == null) {
       downloadAndProcessDocument(presentationService.defaultUploadedPresentation, conf.getInternalId(), true /* default presentation */, '');
+      def dir = new File('/var/www/bigbluebutton-default/default_pdf/')
+      dir.eachFileRecurse (FileType.FILES) { file ->
+        downloadAndProcessDocument(presentationService.defaultUploadedPresentationDir+file.name, conf.getInternalId(), false, '');
+      }
     } else {
       log.debug "Request body: \n" + requestBody;
       def xml = new XmlSlurper().parseText(requestBody);
