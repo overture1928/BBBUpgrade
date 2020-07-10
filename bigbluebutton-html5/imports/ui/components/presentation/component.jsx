@@ -394,6 +394,7 @@ class PresentationArea extends PureComponent {
       currentSlide,
       slidePosition,
       userIsPresenter,
+      AllowDownloadFile
     } = this.props;
 
     const {
@@ -449,7 +450,7 @@ class PresentationArea extends PureComponent {
         }}
       >
         {this.renderPresentationClose()}
-        {this.renderPresentationDownload()}
+        {AllowDownloadFile ? this.renderPresentationDownload() : null}
         {this.renderPresentationFullscreen()}
         <svg
           key={currentSlide.id}
@@ -584,6 +585,7 @@ class PresentationArea extends PureComponent {
       userIsPresenter,
       multiUser,
       slidePosition,
+      AllowDownloadFile
     } = this.props;
 
     const {
@@ -703,6 +705,7 @@ PresentationArea.propTypes = {
   }),
   // current multi-user status
   multiUser: PropTypes.bool.isRequired,
+  AllowDownloadFile: PropTypes.bool,
 };
 
 PresentationArea.defaultProps = {

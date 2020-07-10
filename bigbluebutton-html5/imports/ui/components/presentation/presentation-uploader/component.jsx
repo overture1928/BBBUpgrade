@@ -20,6 +20,8 @@ const propTypes = {
   intl: intlShape.isRequired,
   mountModal: PropTypes.func.isRequired,
   defaultFileName: PropTypes.string.isRequired,
+  AllowDownloadFile: PropTypes.bool,
+  AllowDownloadFiledelete: PropTypes.bool,
   fileSizeMin: PropTypes.number.isRequired,
   fileSizeMax: PropTypes.number.isRequired,
   handleSave: PropTypes.func.isRequired,
@@ -540,7 +542,7 @@ class PresentationUploader extends Component {
   renderPresentationItem(item) {
     const { disableActions, oldCurrentId } = this.state;
     const { intl } = this.props;
-
+    const {AllowDownloadFile, AllowDownloadFiledelete} =this.props;
     const isActualCurrent = item.id === oldCurrentId;
     const isUploading = !item.upload.done && item.upload.progress > 0;
     const isConverting = !item.conversion.done && item.upload.done;
@@ -592,7 +594,8 @@ class PresentationUploader extends Component {
         </td>
         {hasError ? null : (
           <td className={styles.tableItemActions}>
-            <Button
+            {AllowDownloadFile ?
+            (<Button
               className={isDownloadableStyle}
               label={formattedDownloadableLabel}
               aria-label={formattedDownloadableAriaLabel}
@@ -600,7 +603,7 @@ class PresentationUploader extends Component {
               size="sm"
               icon={item.isDownloadable ? 'download' : 'download-off'}
               onClick={() => this.toggleDownloadable(item)}
-            />
+            />) : null}
             <Checkbox
               ariaLabel={`${intl.formatMessage(intlMessages.setAsCurrentPresentation)} ${item.filename}`}
               checked={item.isCurrent}
@@ -609,18 +612,19 @@ class PresentationUploader extends Component {
               keyValue={item.id}
               onChange={this.handleCurrentChange}
             />
-            {hideRemove ? null : (
-              <Button
-                disabled={disableActions}
-                className={cx(styles.itemAction, styles.itemActionRemove)}
-                label={intl.formatMessage(intlMessages.removePresentation)}
-                aria-label={`${intl.formatMessage(intlMessages.removePresentation)} ${item.filename}`}
-                size="sm"
-                icon="delete"
-                hideLabel
-                onClick={() => this.handleRemove(item)}
-              />
-            )}
+            {AllowDownloadFiledelete ?
+              hideRemove ? null : (
+                <Button
+                  disabled={disableActions}
+                  className={cx(styles.itemAction, styles.itemActionRemove)}
+                  label={intl.formatMessage(intlMessages.removePresentation)}
+                  aria-label={`${intl.formatMessage(intlMessages.removePresentation)} ${item.filename}`}
+                  size="sm"
+                  icon="delete"
+                  hideLabel
+                  onClick={() => this.handleRemove(item)}
+                />
+              ) : null}
           </td>
         )}
       </tr>

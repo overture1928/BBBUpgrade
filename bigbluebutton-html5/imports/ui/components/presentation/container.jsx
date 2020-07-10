@@ -43,6 +43,7 @@ export default withTracker(({ podId }) => {
       && !layoutSwapped,
     presentationIsDownloadable,
     mountPresentationArea: !!currentSlide,
+    AllowDownloadFile: Meteor.settings.public.presentation.AllowPresentationDownload,
     currentPresentation: PresentationAreaService.getCurrentPresentation(podId),
     notify,
     zoomSlide: PresentationToolbarService.zoomSlide,

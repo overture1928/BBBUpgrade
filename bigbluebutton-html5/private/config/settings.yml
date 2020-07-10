@@ -197,6 +197,8 @@ public:
     uploadEndpoint: "/bigbluebutton/presentation/upload"
     uploadSizeMin: 0
     uploadSizeMax: 50000000
+    AllowPresentationDownload: true
+    AllowPresentationDelete: false
     uploadValidMimeTypes:
     - extension: .pdf
       mime: application/pdf

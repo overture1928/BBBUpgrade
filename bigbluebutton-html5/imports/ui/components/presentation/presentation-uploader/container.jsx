@@ -19,6 +19,8 @@ export default withTracker(() => {
     fileSizeMin: PRESENTATION_CONFIG.uploadSizeMin,
     fileSizeMax: PRESENTATION_CONFIG.uploadSizeMax,
     fileValidMimeTypes: PRESENTATION_CONFIG.uploadValidMimeTypes,
+    AllowDownloadFile: PRESENTATION_CONFIG.AllowPresentationDownload,
+    AllowDownloadFiledelete: PRESENTATION_CONFIG.AllowPresentationDelete,
     handleSave: presentations => Service.persistPresentationChanges(
       currentPresentations,
       presentations,
